@@ -1,0 +1,12 @@
+FROM gradle:latest AS build-stage
+WORKDIR /backend-engineer-assessment
+COPY build.gradle settings.gradle ./
+COPY src ./src
+RUN gradle build --no-daemon
+
+FROM openjdk:21-jdk-slim
+WORKDIR /backend-engineer-assessment
+COPY --from=build-stage /backend-engineer-assessment/build/libs/*.jar app.jar
+EXPOSE 8888
+ENTRYPOINT ["java", "-jar", "app.jar"]
+

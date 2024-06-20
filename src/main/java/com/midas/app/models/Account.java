@@ -29,6 +29,13 @@ public class Account {
   @Column(name = "email")
   private String email;
 
+  @Enumerated(EnumType.STRING)
+  @Column(name = "provider_type")
+  private ProviderType providerType;
+
+  @Column(name = "provider_id")
+  private String providerId;
+
   @Column(name = "created_at")
   @CreationTimestamp
   private OffsetDateTime createdAt;

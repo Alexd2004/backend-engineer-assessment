@@ -1,6 +1,6 @@
 package com.midas.app.exceptions;
 
-import com.midas.generated.model.ErrorDto;
+import com.midas.app.generated.model.ErrorDto;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import java.util.ArrayList;

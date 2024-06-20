@@ -1,5 +1,6 @@
 package com.midas.app.services;
 
+import com.midas.app.generated.model.AccountDto;
 import com.midas.app.models.Account;
 import com.midas.app.repositories.AccountRepository;
 import com.midas.app.workflows.CreateAccountWorkflow;
@@ -7,6 +8,7 @@ import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import io.temporal.workflow.Workflow;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
@@ -49,5 +51,21 @@ public class AccountServiceImpl implements AccountService {
   @Override
   public List<Account> getAccounts() {
     return accountRepository.findAll();
+  }
+
+  /**
+   * Updates a already created account in the system
+   *
+   * @param optionalAccount holds the account that needs to be updated
+   * @param accountDto holds the updated information
+   * @return Account
+   */
+  @Override
+  public Account updateAccount(Optional<Account> optionalAccount, AccountDto accountDto) {
+    Account account = optionalAccount.get();
+    account.setEmail(accountDto.getEmail());
+    account.setFirstName(accountDto.getFirstName());
+    account.setLastName(accountDto.getLastName());
+    return account;
   }
 }

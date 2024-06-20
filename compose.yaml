@@ -6,4 +6,12 @@ services:
       - 'POSTGRES_PASSWORD=secret'
       - 'POSTGRES_USER=myuser'
     ports:
-      - '5432'
+      - '5432:5432'
+  app:  
+    build: 
+      context: .
+      dockerfile: DockerFile
+    ports:
+      - '8888:8888'
+    depends_on:
+      - postgres
